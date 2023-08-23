@@ -6,34 +6,43 @@
 #COPIAR CÓDIGO
 #Sabendo que cada setor tem 10 funcionários, construa um código que calcule a média de idade de cada setor, a idade média geral entre todos os setores e quantas pessoas estão acima da idade média geral.
 
+#Funções
+
+def calculoMediaIdadesPorSetor(lista):
+  for setor, idades in lista.items():
+    mediaSetor = round(sum(idades)/len(idades))
+    mediasSetores[setor] = mediaSetor
+  return mediasSetores
+
+def calculoMediaGeral(mediasSetores):
+  mediaGeral = round(sum(mediasSetores.values())/len(mediasSetores))
+  return mediaGeral
+
+def calculoNumeroPessoasComIdadeAcimaDaMedia(lista):
+  nrPessoasComIdadeAcimaDaMediaGeral = 0
+  for setor, idades in lista.items():
+    for idades in idades:
+      if idades > mediaGeral:
+        nrPessoasComIdadeAcimaDaMediaGeral += 1
+  return nrPessoasComIdadeAcimaDaMediaGeral
+
+def imprimirResultados():
+  for setor, media_idades in mediasSetores.items():
+    print(f'{setor} Media idades = {media_idades}')
+  print(f'\nMedia geral das idades {mediaGeral}' )
+  print(f'\nNúmero de pessoas acima da media geral de idade =   {nrPessoasComIdadeAcimaDaMediaGeral}')
+
+
+#Declaração de Variáveis
 lista ={'Setor A': [22, 26, 30, 30, 35, 38, 40, 56, 57, 65],
         'Setor B': [22, 24, 26, 33, 41, 49, 50, 54, 60, 64],
         'Setor C': [23, 26, 26, 29, 34, 35, 36, 41, 52, 56],
         'Setor D': [19, 20, 25, 27, 34, 39, 42, 44, 50, 65]}
-somaIdadeSetorA = somaIdadeSetorB = somaIdadeSetorC = somaIdadeSetorD = 0
-for chave, valor in lista.items():
-  if chave == 'Setor A':
-    somaIdadeSetorA = sum(lista['Setor A'])
-  elif chave == 'Setor B':
-    somaIdadeSetorB = sum(lista['Setor B'])
-  elif chave == 'Setor C':
-    somaIdadeSetorC = sum(lista['Setor C'])
-  else:
-    somaIdadeSetorD = sum(lista['Setor D'])
-mediaIdadeSetorA = somaIdadeSetorA / 10
-mediaIdadeSetorB = somaIdadeSetorB / 10
-mediaIdadeSetorC = somaIdadeSetorC / 10
-mediaIdadeSetorD = somaIdadeSetorD / 10
-mediaGeral = (mediaIdadeSetorA + mediaIdadeSetorB + mediaIdadeSetorC + mediaIdadeSetorD) / 4
-nrPessoasComIdadeAcimaDaMediaGeral = 0
-for chave, valor in lista.items():
-   for valor in valor:
-      if valor > mediaGeral:
-          nrPessoasComIdadeAcimaDaMediaGeral += 1
-print(f'\nMedia Idades por Setor\n')
-print(f'\nSetor A = {mediaIdadeSetorA}')
-print(f'\nSetor B = {mediaIdadeSetorB}')
-print(f'\nSetor C = {mediaIdadeSetorC}')
-print(f'\nSetor D = {mediaIdadeSetorD}')
-print(f'\nMedia Geral = {mediaGeral}')
-print(f'\nNr de pessoas com idade acima da media geral = {nrPessoasComIdadeAcimaDaMediaGeral}')
+mediasSetores = {}
+#Processamento dos dados
+mediasSetores = calculoMediaIdadesPorSetor(lista)
+mediaGeral = calculoMediaGeral(mediasSetores)
+nrPessoasComIdadeAcimaDaMediaGeral = calculoNumeroPessoasComIdadeAcimaDaMedia(lista)
+imprimirResultados()  
+
+
